@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const port = 8080;
 
-const birds = require('../routes/birds');
+const birds = require('../routesSample/birds');
+const login = require('./login/LoginController');
 app.use('/birds', birds);
+app.use(login);
 
 app.get('/', (req, res) => {
     console.log('/');
@@ -16,5 +18,5 @@ app.get('/api', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log('8080 포트에서 대기중');
+    console.log(`server run at ${port} port!!!`);
 });
