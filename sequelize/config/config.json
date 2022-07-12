@@ -16,6 +16,7 @@
       "dialectOptions": {
         "collate": "utf8_general_ci"
       },
+      "freezeTableName": true,
       "timestamps": true
     }
   },

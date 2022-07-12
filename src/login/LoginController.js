@@ -18,6 +18,7 @@ router.get(loginPath, (req, res) => {
 // 홈페이지 정의
 router.get(`${loginPath}/test`, (req, res) => {
     console.log('login/test');
+    console.log('성공!!');
 
     res.send('test');
 
