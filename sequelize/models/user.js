@@ -2,9 +2,14 @@ const sequelize = require('./index');
 const {DataTypes} = require("sequelize");
 
 const User = sequelize.define('user', {
+    // id: {
+    //     type: DataTypes.INTEGER,
+    //     primaryKey: true,
+    // },
     userID: {
         type: DataTypes.STRING,
         allowNull: true,
+        primaryKey: true,
     },
     userPassword: {
         type: DataTypes.STRING,
@@ -23,7 +28,7 @@ const User = sequelize.define('user', {
         allowNull: true,
     },
 }, {
-    sequelize,
+    timestamps: false,
 });
 
 module.exports = User;

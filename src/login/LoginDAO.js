@@ -7,12 +7,16 @@ const User = require('../../sequelize/models/user');
 
 
 
-const user = async (req, res) => {
-    let a = User.findAll();
-    return a;
+const user = async () => {
+    const users = await User.findAll();
+    console.log(users.every(user => user instanceof User)); // true
+    console.log("All users: ", JSON.stringify(users, null, 2));
 }
 
-console.log(user());
+user();
+
+
+//console.log(user());
 
 // const query = 'select * from user';
 // sequelize.query(query)
