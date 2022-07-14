@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const user= require('./LoginDAO');
 
 const loginPath = '/login';
 
@@ -19,6 +20,7 @@ router.get(loginPath, (req, res) => {
 router.get(`${loginPath}/test`, (req, res) => {
     console.log('login/test');
     console.log('성공!!');
+    user();
 
     res.send('test');
 
