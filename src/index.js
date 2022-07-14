@@ -4,8 +4,14 @@ const port = 8080;
 
 const birds = require('../routesSample/birds');
 const login = require('./login/LoginController');
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/birds', birds);
 app.use(login);
+
+
 
 app.get('/', (req, res) => {
     console.log('/');
