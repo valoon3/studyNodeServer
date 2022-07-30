@@ -1,13 +1,34 @@
+const path = require('path');
 const express = require('express');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv');
 const app = express();
+const morgan = require('morgan');
 
 // 라우터 경로 임포트
 const port = 8080;
 const totalRouter = require('./totalRouter');
 
 // 추가된 미들웨어
+dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/', express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({
+    resave: false,
+    saveUninitialized: true,
+    secret: process.env.COOKIE_SECRET,
+    cookies: {
+        httpOnly: true,
+        secure: false,
+    },
+    name: 'session-cookies',
+}));
+app.use(morgan('dev')); // log 미들웨어
+
 
 // 서버에서 cors 허락
 // npm i cors를 통해서 해결도 가능하다.
@@ -18,14 +39,6 @@ app.use((req, res, next) => {
 
 // 라우터 미들웨어 설정
 app.use(totalRouter);
-
-
-app.get('/', (req, res) => {
-    console.log('/');
-    res.send('hello world');
-});
-
-
 
 app.listen(port, () => {
     console.log(`server run at ${port} port!!!`);

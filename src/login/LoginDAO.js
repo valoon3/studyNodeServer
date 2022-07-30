@@ -1,17 +1,11 @@
-const sequelize = require('../../sequelize/models/index');
-const User = require('../../sequelize/models/user');
+const db = require('../../mysql/index');
 
-const user = async () => {
-    try{
-        const users = await User.findAll();
-        // console.log(users.every(user => user instanceof User)); // true
+const login = async function(callback, user) {
+    // https://github.com/sidorares/node-mysql2
+    const sql = 'select * from `user` where `userID` = ? and `userPassword` = ?';
 
-        // console.log("All users: ", JSON.stringify(users, null, 2));
-
-        return
-    } catch(err){
-        console.log(err);
-    }
+    const [rows, field] = await db.query(sql, [user.userID, user.userPassword]);
+    callback(rows);
 }
 
-module.exports = user;
+// module.exports = { login }

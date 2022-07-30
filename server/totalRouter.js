@@ -5,7 +5,7 @@ const index = require('../src/index');
 const loginController = require('../src/login/LoginController');
 
 router.use(index);
-router.use(loginController);
+router.use('/login', loginController);
 
 module.exports = router;
 

@@ -1,3 +1,4 @@
 /.idea/
 /nodeServer.iml
 /node_modules/
+/.env

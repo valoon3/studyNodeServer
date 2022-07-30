@@ -1,26 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
-const user= require('./LoginDAO');
+const loginService = require('./LoginService');
 
-router.use('/login', (err, req, res, next) => {
+// login
+router.use((req, res, next) => {
+    console.log('login 시작');
     next();
 })
 
-router.use((req, res, next) => {
-    console.log('/login');
-    next();
-})
-
-router.use((req, res, next) => {
-    console.log('test');
-    next();
-});
-
-router.get((req, res) => {
+router.get('/', (req, res, next) => {
     console.log('success');
-    console.log(req);
+    res.status(200).send('success');
 });
+
+router.post('/', (req, res) => {
+    console.log('testtest')
+    // loginService.login((selectResult, cookiesStatus) => {
+    //     res.cookies
+    // }, req.body, res)
+
+})
 
 
 // 홈페이지 정의
@@ -49,6 +48,7 @@ router.get(`/test`, (req, res) => {
 router.get('/about', (req, res) => {
     res.send('about test');
 });
+
 
 module.exports = router;
 
