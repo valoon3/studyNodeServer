@@ -14,11 +14,12 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res) => {
-    console.log('testtest')
+    console.log('testtest');
+    console.log(req.body);
     // loginService.login((selectResult, cookiesStatus) => {
     //     res.cookies
     // }, req.body, res)
-
+    res.status(200).send('login access');
 })
 
 

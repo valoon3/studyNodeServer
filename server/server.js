@@ -5,13 +5,30 @@ const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const app = express();
 const morgan = require('morgan');
+const cors = require('cors');
+const corsOption = require('./cors');
 
 // 라우터 경로 임포트
 const port = 8080;
 const totalRouter = require('./totalRouter');
 
+// // corsOption 설정
+// const allowList = ['http://localhost:3000'];
+//
+// const corsOptions = {
+//     origin: function(origin, callback) {
+//         if(allowList.indexOf(origin)  !== -1 ) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('cors 오류를 발생시켰다!'));
+//         }
+//     },
+//     optionsSuccessStatus: 200
+// }
+
 // 추가된 미들웨어
 dotenv.config();
+app.use(cors(corsOption));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, 'public')))
@@ -36,6 +53,7 @@ app.use((req, res, next) => {
 // npm i cors를 통해서 해결도 가능하다.
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // cors 해결 방법
+    console.log('cors 설정');
     next();
 })
 
@@ -45,3 +63,4 @@ app.use(totalRouter);
 app.listen(port, () => {
     console.log(`server run at ${port} port!!!`);
 });
+

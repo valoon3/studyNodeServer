@@ -8,4 +8,4 @@ const login = async function(callback, user) {
     callback(rows);
 }
 
-// module.exports = { login }
+module.exports = { login }
