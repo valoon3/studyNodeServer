@@ -16,18 +16,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: false}));
-app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
-    resave: false,
-    saveUninitialized: true,
     secret: process.env.COOKIE_SECRET,
+    resave: false, // 변환 내용이 없더라도 다시 저장할 것인가
+    saveUninitialized: true, // 저장할 내용이 없더라도 세션을 생성할 것인인가
     cookies: {
         httpOnly: true,
         secure: false,
     },
     name: 'session-cookies',
 }));
-app.use(morgan('dev')); // log 미들웨어
+
+app.use((req, res, next) => {
+    process.env.NODE_ENV === 'production' ? morgan('combined')(req, res, next) : morgan('dev')(req, res, next);
+});
 
 
 // 서버에서 cors 허락
