@@ -14,12 +14,15 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res) => {
-    console.log('testtest');
-    console.log(req.body);
-    // loginService.login((selectResult, cookiesStatus) => {
-    //     res.cookies
-    // }, req.body, res)
-    res.status(200).send('login access');
+    console.log('-login post-');
+    console.log('req.body : ', req.body);
+    loginService.login((result, json) => {
+        console.log(result);
+        console.log(json);
+        result === 'success' ? res.status(200).send(json) : res.status(400).send('fail');
+    }, req.body, res);
+
+    // res.status(200).send('login access');
 })
 
 

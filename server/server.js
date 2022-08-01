@@ -6,29 +6,16 @@ const dotenv = require('dotenv');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
-const corsOption = require('./cors');
 
 // 라우터 경로 임포트
 const port = 8080;
+const corsOption = require('./cors');
 const totalRouter = require('./totalRouter');
-
-// // corsOption 설정
-// const allowList = ['http://localhost:3000'];
-//
-// const corsOptions = {
-//     origin: function(origin, callback) {
-//         if(allowList.indexOf(origin)  !== -1 ) {
-//             callback(null, true);
-//         } else {
-//             callback(new Error('cors 오류를 발생시켰다!'));
-//         }
-//     },
-//     optionsSuccessStatus: 200
-// }
 
 // 추가된 미들웨어
 dotenv.config();
-app.use(cors(corsOption));
+app.use(cors()); // cors 설정
+// app.use(cors(corsOption)); // cors 설정 나중에 배포때 수정하자
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, 'public')))

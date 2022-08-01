@@ -1,5 +1,5 @@
 // corsOption 설정
-const allowList = ['http://localhost:3000'];
+const allowList = ['http://localhost:8080', 'http://localhost:3000'];
 
 const corsOptions = {
     origin: function(origin, callback) {

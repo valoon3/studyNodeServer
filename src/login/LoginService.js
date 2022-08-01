@@ -2,12 +2,15 @@ const loginDao = require('./LoginDao');
 
 const login = function(callback, user, res) {
     loginDao.login((selectResult) => {
-        console.log(selectResult[0]);
-        if(selectResult.length > 0) {
-            callback('success', selectResult[0]);
-        }
-        else {
-            callback('아이디, 비밀번호를 확인해주세요.');
+        try {
+            if(selectResult.length > 0) { // 조회결과가 있었을 경우
+                callback('success', JSON.stringify(selectResult[0]));
+            }
+            else { // 일치하는 조회결과가 없었을 경우
+                callback('fail');
+            }
+        } catch(err) { // 데이터베이스 오류가 나왔을 경우
+            console.error('LoginDAO 데이터베이스 오류 : ', err);
         }
     }, user)
         .catch(err => { console.error('loginService 에러 : ', err)})
