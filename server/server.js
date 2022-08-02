@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
+const passport = require('passport');
 
 // 라우터 경로 임포트
 const port = 8080;
