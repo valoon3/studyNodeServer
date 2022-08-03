@@ -12,9 +12,11 @@ const passport = require('passport');
 const port = 8080;
 const corsOption = require('./cors');
 const totalRouter = require('./totalRouter');
+const passportConfig = require('../passport/index')
 
 // 추가된 미들웨어
 dotenv.config();
+passportConfig(); // 패스포트 설정
 app.use(cors()); // cors 설정
 // app.use(cors(corsOption)); // cors 설정 나중에 배포때 수정하자
 app.use(express.json());
@@ -31,6 +33,8 @@ app.use(session({
     },
     name: 'session-cookies',
 }));
+app.use(passport.initialize()); // req 객체에 passport 설정을 심고
+app.use(passport.session()); // req.session 객체에 passport 정보를 저장한다.
 
 app.use((req, res, next) => {
     process.env.NODE_ENV === 'production' ? morgan('combined')(req, res, next) : morgan('dev')(req, res, next);
