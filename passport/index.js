@@ -30,6 +30,7 @@ module.exports = () => {
     // 5. req.login 메서드가 passport.serializeUser
     // 6. req.session에 사용자 아이디만 저장
     // 7. 로그인 완료
+    // session
 
     // 로그인 이후 과정
     // 1. 요청이 들어옴
