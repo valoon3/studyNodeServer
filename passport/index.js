@@ -20,9 +20,11 @@ module.exports = () => {
         // 6. 조회한 정보를 req.user에 저장하므로 앞으로 req.user를 통해 로그인한 사용자의 정보를 가져올 수 있다.
         User.findeOne({ where: {id}})
             .then(user => done(null, user))
-            .catch(err => done(err))
+            .catch(err => {
+                `done(err)`
+                console.log(err);
+            })
     });
-    userfine 안된다 session
 
     // 1. 라우터를 통해 로그인 요청이 들어옴
     // 2. 라우터에서 passportauthenticate 메서드 호출
