@@ -22,6 +22,7 @@ module.exports = () => {
             .then(user => done(null, user))
             .catch(err => done(err))
     });
+    userfine 안된다 session
 
     // 1. 라우터를 통해 로그인 요청이 들어옴
     // 2. 라우터에서 passportauthenticate 메서드 호출
