@@ -4,11 +4,13 @@ const passport = require('passport');
 module.exports = () => {
 
     passport.serializeUser((user, done) => {
-        // 1. 로그인 시 실행
+        // 1. 로그인 시 실행된다.
         // 2. req.session 객체에 어떤 데이터를 저장할지 정하는 메서드
         // 3. 매개변수로 user를 받고 나서, done 함수에 두 번째 인수로 user.id를 넘기는거다.
         done(null, user.id); // 4. done(에러 발생 시 사용하는 인수, 저장하고 싶은 데이터)
         // 5. 여기서는 아이디만 넘기는 형식
+
+        // 사용자 정보 객체를 세션에 아이디로 저장하는 용도
     });
 
     passport.deserializeUser((id, done) => {
@@ -18,6 +20,8 @@ module.exports = () => {
         // 4. 여기서는 사용자의 아이디이다.
         // 5. serializeUser에서 세션에 저장했던 아이디를 받아 데이터베이스에서 사용자 정보를 조회한다.
         // 6. 조회한 정보를 req.user에 저장하므로 앞으로 req.user를 통해 로그인한 사용자의 정보를 가져올 수 있다.
+
+        // 세션에 저장한 아이디를 통해 사용자 정보 객체를 불러오는 용도
 
         // User.findeOne({ where: {id}})
         //     .then(user => done(null, user))
