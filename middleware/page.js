@@ -1,5 +1,5 @@
 const express = require('express');
-const { isLoggedIn, inNotLoggedIn} = require('../login/LoginService');
+const { isLoggedIn, inNotLoggedIn} = require('../src/login/LoginService');
 
 const router = express.Router();
 router.use((req, res, next) => {

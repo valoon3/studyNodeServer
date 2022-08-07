@@ -23,12 +23,12 @@ module.exports = () => {
 
         // 세션에 저장한 아이디를 통해 사용자 정보 객체를 불러오는 용도
 
-        // User.findeOne({ where: {id}})
-        //     .then(user => done(null, user))
-        //     .catch(err => {
-        //         `done(err)`
-        //         console.log(err);
-        //     })
+        User.findeOne({ where: {id}})
+            .then(user => done(null, user))
+            .catch(err => {
+                `done(err)`
+                console.log(err);
+            })
     });
 
     // 1. 라우터를 통해 로그인 요청이 들어옴
