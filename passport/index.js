@@ -1,5 +1,13 @@
 const passport = require('passport');
 
+// 1. 라우터를 통해 로그인 요청이 들어옴
+// 2. 라우터에서 passport.authenticate 메서드 호출
+// 3. 로그인 전략 수행
+// 4. 로그인 성공 시 사용자 정보 객체와 함께 req.login 호출
+// 5. req.login 메서드가 passport.serializeUser 호출
+// 6. req.session에 사용자 아이디만 저장
+// 7. 로그인 완료
+
 // server에서 로그인 시 실행되며, req.session 객체에 어떤 데이터를 저장할지 정하는 메서드입니다.
 module.exports = () => {
 
