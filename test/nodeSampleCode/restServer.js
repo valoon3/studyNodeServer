@@ -1,10 +1,12 @@
 const http = require('http');
 const fs = require('fs').promises;
+
 const users = {};
 
 http.createServer(async function(req, res) {
     try {
         console.log(req.method, req.url);
+        console.log(users);
         if(req.method === 'GET') {
             if(req.url === '/') {
                 const data = await fs.readFile('./restFront.html');
@@ -15,6 +17,10 @@ http.createServer(async function(req, res) {
                 const data = await fs.readFile('./about.html');
                 res.writeHead(200, { 'Content-Type' : 'text/html; charset=utf-8' });
                 return res.end(data);
+            }
+            else if(req.url === '/users') {
+                res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+                return res.end(JSON.stringify(users));
             }
 
             // 주소가 /도 /about 도 아니면
@@ -33,10 +39,10 @@ http.createServer(async function(req, res) {
                 req.on('data', (data) => {
                     body += data;
                 });
-                // 요청의 body 를 stream 형식으로 받음
+                // 요청의 body 를 다 받은 후 실행됨
                 return req.on('end', () => {
                     console.log('POST 본문(Body): ', body);
-                    const { name } =JSON.parse(body);
+                    const { name } = JSON.parse(body);
                     const id = Date.now();
                     users[id] = name;
                     res.writeHead(201);
