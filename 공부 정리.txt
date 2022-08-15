@@ -7,8 +7,22 @@
 
 = 양방향 암호화 =
 1. 암호화된 문자열을 복호할 수 있다.
-2.
 
+= event =
+readStream에서 보통 error, data, end 이벤트를 사용한다.
+파일을 읽는도중 error가 발생하면 error
+파일 읽기가 성공하면 data 이벤트가 실행된다.
+파일을 다 읽으면 end 이벤트가 실행된다.
+
+1. on(이벤트명, 콜백) : 이벤트 이름과 이벤트 발생시 일어나는 콜백을 연결한다.
+    - data라는 이벤트와 on라는 이벤트가 발생할 때 콜백 함수를 호출하도록 이벤트를 등혹하는 과정
+2. addListener : on과 같다.
+3. emit(이벤트명) : 이벤트를 호출하는 메서드, 이벤트 이름을 넣으면 미리 등록해둔 콜백이 실행된다.
+4. once(이벤트명, 콜백) : 한번만 실행되는 메서드, 한번 실행되면 이후 삭제된다.
+5. removeAllListeners(이벤트명) : 이벤트에 연결된 모든 모든 이벤트 리스너를 삭제한다.
+
+== node.js http 구현 관련 내용 == 서버 모르는 내용 있을때 꼭 참고하자 == !!! 중요
+https://nodejs.org/ko/docs/guides/anatomy-of-an-http-transaction/
 
 1. 요청과 응답 이해하기
  1) res 객체에는 writeHead, write, end 메서드가 있다.
