@@ -14,6 +14,14 @@ readStream에서 보통 error, data, end 이벤트를 사용한다.
 파일 읽기가 성공하면 data 이벤트가 실행된다.
 파일을 다 읽으면 end 이벤트가 실행된다.
 
+== cookie ==
+1. createServer의 메서드는 req 객체에 담겨있는 cookie를 가져옵니다.
+2. 쿠키는 req.headers.cookie 에 들어있다.
+3. req.headers 는 요청의 헤더를 의미한다.
++ 4. req.url 은 path와 search 부분을 알린다.
+
+== npm package manager ==
+
 1. on(이벤트명, 콜백) : 이벤트 이름과 이벤트 발생시 일어나는 콜백을 연결한다.
     - data라는 이벤트와 on라는 이벤트가 발생할 때 콜백 함수를 호출하도록 이벤트를 등혹하는 과정
 2. addListener : on과 같다.
@@ -51,3 +59,11 @@ https://nodejs.org/ko/docs/guides/anatomy-of-an-http-transaction/
  7) OPTION : 요청을 하기 전에 통신 옵션을 설명하기 위해 사용한다.
 
  8) GET 의 경우에는 브라우저에서 캐싱(기억)할 수도 있으므로 같은 주소로 GET 요청을 할 때 서버에서 가져오는 것이 아니라 캐시에서 가져올 수도 있다.
+
+
+ == express ==
+ 1. app.set(키, 값) 을 사용해서 데이터를 저장한다.
+ 2. app.get(키) app.set으로 저장한 내용을 가져온다.
+ 3. app.get(주소, 라우터) : 주소에 대한 어떠한 요청이 들어올 때 어떤 동작을 할지 정의합니다.
+ 4. app.use() : 미들웨어를 사용할 때는 app.use를 사용한다.
+    -

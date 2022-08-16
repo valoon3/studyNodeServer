@@ -48,7 +48,7 @@ window.onload = getUser;
 
 // 폼 제출(submit) 시 실행
 document.getElementById('form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // 기본 동작을 하지 않도록 막는다.
     const name = e.target.username.value;
     if(!name) {
         return alert('이름을 입력하세요');
