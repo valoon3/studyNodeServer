@@ -7,6 +7,7 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 
 // 라우터 경로 임포트
 const port = 8080;
@@ -19,6 +20,8 @@ dotenv.config();
 app.use(cors()); // cors 설정
 // app.use(cors(corsOption)); // cors 설정 나중에 배포때 수정하자
 app.use(express.json());
+app.use(bodyParser.raw());
+app.use(bodyParser.text());
 passportConfig();
 app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, 'public')))
