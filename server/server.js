@@ -19,9 +19,7 @@ const passportConfig = require('../passport/index');
 dotenv.config();
 app.use(cors()); // cors 설정
 // app.use(cors(corsOption)); // cors 설정 나중에 배포때 수정하자
-app.use(express.json());
-app.use(bodyParser.raw());
-app.use(bodyParser.text());
+app.use(express.json(), bodyParser.raw(), bodyParser.text()); // 여러개 미들웨어 장착 가능
 passportConfig();
 app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, 'public')))
@@ -41,7 +39,7 @@ app.use(passport.session()); // req.session 객체에 passport 정보를 저장�
 app.use((req, res, next) => {
     process.env.NODE_ENV === 'production' ? morgan('combined')(req, res, next) : morgan('dev')(req, res, next);
 });
-
+// app.use(cookieParser(비밀키)); // req.cookies 객체에 들어간다.
 
 // 서버에서 cors 허락
 // npm i cors를 통해서 해결도 가능하다.
@@ -51,9 +49,14 @@ app.use((req, res, next) => {
     next();
 })
 
+
 // 라우터 미들웨어 설정
 app.use(totalRouter);
 
+// 에러처리 미들웨어
+app.use((req, res, next) => {
+    res.status(404).send('Not Found');
+});
 app.listen(port, () => {
     console.log(`server run at ${port} port!!!`);
 });
