@@ -20,8 +20,60 @@ readStream에서 보통 error, data, end 이벤트를 사용한다.
 3. req.headers 는 요청의 헤더를 의미한다.
 + 4. req.url 은 path와 search 부분을 알린다.
 
-== npm package manager ==
+== req, res 객체 알아보기 ==
+1. 익스프레스의 req, res 객체는 http 모듈의 req, res 객체를 확장한 것 => 기존의 http 메서드와 express 에서 추가한 메서드도 사용할 수 있다.
+2. req
+    1) req.app
+     - req객체를 통해 app 객체에 접근할 수 있다.
+     - req.app.get('port')와 같은 식으로 사용할 수 있다.
+    2) req.body
+     - body-parser 미들웨어가 만드는 요청의 본문을 해석한 객체이다.
+    3) req.cookies
+     - cookie-parser 미들웨어가 만드는 요청의 본문을 해석한 객체
+    4) req.ip
+     - 요청의 ip 주소가 담겨 있다.\
+    5) req.params
+     - 라우트 매개변수에 대한 정보가 담긴 객체
+    6) req.query
+     - 쿼리스트링에 대한 정보가 담긴 객체
+    7) req.signedCookies
+     - 서명된 쿠키들은 req.cookies 대신 여기에 담겨있다.
+    8) req.get(헤더이름)
+     - 헤더의 값을 가져오고 싶을 때 사용하는 메서드
+3. res
+    1) res.app
+     - res.app 처럼 res 객체를 통해 app 객체에 접근할 수 있다.
+    2) res.cookie(키, 값, 옵션)
+     - 쿠키를 설정하는 메서드
+    3) res.clearCookie(키, 값, 옵션)
+     - 쿠키를 제거하는 메서드
+    4) res.end()
+     - 데이터 없이 응답을 보낸다.
+    5) res.json(JSON)
+     - json 형식의 응답을 보낸다.
+    6) res.redirect(주소)
+     - 리다이렉트할 주소와 함께 응답을 보낸다.
+    7) res.render(뷰, 데이터)
+     - 템플릿 엔진을 렌더링해서 응답할 떄 사용하는 메서드 ex) 퍼그
+    8) res.send(데이터)
+     - 데이터와 함께 응답을 보낸다.
+     - 데이터는 문자열일 수도 있고 HTML 일 수도 있으며, 버퍼일 수도 있고 객체나 배열을 수도 있다.
+    9) res.sendFile(경로)
+     - 경로에 위치한 파일을 응답한다.
+    10) res.set(헤더, 값)
+     - 응답의 헤더를 설정한다.
+    11) res.status(코드)
+     - 응답 시의 HTTP 상태 코드를 지정한다.
+4. res 나 req 객체의 메서드는 메서드 체이닝을 지원하는 경우가 많다.
+    res
+        .status(201)
+        .cookie('test', 'test')
+        .redirect('/admin');
 
+    res.status(201).cookie('test', 'test').redirect('/admin');
+
+
+== npm package manager ==
 1. on(이벤트명, 콜백) : 이벤트 이름과 이벤트 발생시 일어나는 콜백을 연결한다.
     - data라는 이벤트와 on라는 이벤트가 발생할 때 콜백 함수를 호출하도록 이벤트를 등혹하는 과정
 2. addListener : on과 같다.
