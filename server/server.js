@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+const { sequelize } = require('../sequelize/models')
 
 // 라우터 경로 임포트
 const port = 8080;
@@ -15,6 +16,13 @@ const corsOption = require('./cors');
 const totalRouter = require('./totalRouter');
 const passportConfig = require('../passport/index');
 
+sequelize.sync({ force: false })
+    .then(() => {
+        console.log('데이터베이스 연결 성공');
+    })
+    .catch((err) => {
+        console.error(err);
+    });
 // 추가된 미들웨어
 dotenv.config();
 app.use(cors()); // cors 설정
@@ -57,6 +65,7 @@ app.use(totalRouter);
 app.use((req, res, next) => {
     res.status(404).send('Not Found');
 });
+
 app.listen(port, () => {
     console.log(`server run at ${port} port!!!`);
 });
