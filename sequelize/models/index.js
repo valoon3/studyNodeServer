@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config.json')[env];
@@ -6,9 +6,8 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 // sequelize connecting test
 sequelize.authenticate()
-    .then(result => {
-        console.log('Connected to database');
-        //console.log(result);
+    .then( () => {
+        console.log('Connected test to database');
     })
     .catch(error => console.log('Unable to connect to the database ', error));
 
