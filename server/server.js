@@ -8,7 +8,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const { sequelize } = require('../sequelize/models')
+const sequelize = require('../sequelize/models')
 
 // 라우터 경로 임포트
 const port = 8080;
